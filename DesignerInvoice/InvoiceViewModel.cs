@@ -95,6 +95,8 @@ namespace DesignerInvoice
                       {
                           filePath = openFileDialog.FileName;
                           CooseFileCheck = true;
+                          Progress = 0;
+                          ConsoleText = "";
                       }
                   }));
             }

@@ -17,13 +17,28 @@ namespace DesignerInvoice.Classes
         }
         public void WriteFileTxt()
         {
-            using (TextWriter tw = new StreamWriter("Invoice.txt"))
+            string pathDir = Directory.GetCurrentDirectory();
+            string fileName = GetFreeFilename(pathDir);
+
+            using (TextWriter tw = new StreamWriter(fileName))
             {
                 foreach (string line in processing.Invoice)
                 {
                     tw.WriteLine(line);
                 }
             }
+        }
+
+        private string GetFreeFilename(string pathDir)
+        {
+            string fileName = "Invoice.txt";
+            int fileCounter = 1;
+            while (File.Exists(pathDir + "\\" + fileName))
+            {
+                fileName = "Invoice (" + fileCounter + ").txt";
+                fileCounter++;
+            }
+            return fileName;
         }
     }
 }

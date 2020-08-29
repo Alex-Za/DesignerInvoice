@@ -63,6 +63,7 @@ namespace DesignerInvoice.Classes
                     {
                         string work = GenerateTypeOfWork(typeOfWork, categorys, brands, mediaCount, dIndex);
                         invoice.Add(work);
+                        invoice.Add("");
                         categorys = new HashSet<string>();
                         brands = new HashSet<string>();
                         mediaCount = 0;
@@ -166,11 +167,18 @@ namespace DesignerInvoice.Classes
                     break;
                 case "Customized/Developed videos for new media  for  brands/categories":
                     sb.Append("- Customized/Developed " + mediaCount + " videos for new media");
-                    if (categorys.Count > 0 || brands.Count > 0)
+                    if (categorys.Count > 0 && brands.Count > 0)
                     {
-                        int count = categorys.Count + brands.Count;
-                        sb.Append(" for " + count + " brands/categories (");
-                        categorys.UnionWith(brands);
+                        sb.Append(" for " + brands.Count + " brands");
+                        sb.Append(" / " + categorys.Count + " categories (");
+                        sb.Append(string.Join(", ", brands) + " / " + string.Join(", ", categorys) + ") (" + dIndex + ")");
+                    } else if (brands.Count > 0)
+                    {
+                        sb.Append(" for " + brands.Count + " brands (");
+                        sb.Append(string.Join(", ", brands) + ") (" + dIndex + ")");
+                    } else if (categorys.Count > 0)
+                    {
+                        sb.Append(" for " + categorys.Count + " categories (");
                         sb.Append(string.Join(", ", categorys) + ") (" + dIndex + ")");
                     } else
                     {
@@ -181,11 +189,21 @@ namespace DesignerInvoice.Classes
                     sb.Append("- Data Mining for Quality Images & Videos with new " + mediaCount + " videos for new media");
                     if (categorys.Count > 0 || brands.Count > 0)
                     {
-                        int count = categorys.Count + brands.Count;
-                        sb.Append(" for " + count + " brands/categories (");
-                        categorys.UnionWith(brands);
+                        sb.Append(" for " + brands.Count + " brands");
+                        sb.Append(" / " + categorys.Count + " categories (");
+                        sb.Append(string.Join(", ", brands) + " / " + string.Join(", ", categorys) + ") (" + dIndex + ")");
+                    }
+                    else if (brands.Count > 0)
+                    {
+                        sb.Append(" for " + brands.Count + " brands (");
+                        sb.Append(string.Join(", ", brands) + ") (" + dIndex + ")");
+                    }
+                    else if (categorys.Count > 0)
+                    {
+                        sb.Append(" for " + categorys.Count + " categories (");
                         sb.Append(string.Join(", ", categorys) + ") (" + dIndex + ")");
-                    } else
+                    }
+                    else
                     {
                         sb.Append(" (" + dIndex + ")");
                     }
