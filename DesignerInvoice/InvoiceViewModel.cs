@@ -23,6 +23,7 @@ namespace DesignerInvoice
             worker.WorkerReportsProgress = true;
             worker.DoWork += work;
             worker.ProgressChanged += workProgressChanged;
+            
         }
 
         private void workProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -88,10 +88,10 @@ namespace DesignerInvoice.Classes
                     continue;
                 }
 
-                if (line[4] != "" && line[4] != "-")
+                if (line[4] != "" && line[4] != "-" && line[4] != "0.00")
                     categorys.Add(line[4]);
 
-                if (line[5] != "" && line[5] != "-")
+                if (line[5] != "" && line[5] != "-" && line[5] != "0.00")
                 {
                     if (line[5].Contains(", "))
                     {
@@ -187,7 +187,7 @@ namespace DesignerInvoice.Classes
                     break;
                 case "Data Mining for Quality Images & Videos with  new media for  brand /categories":
                     sb.Append("- Data Mining for Quality Images & Videos with new " + mediaCount + " videos for new media");
-                    if (categorys.Count > 0 || brands.Count > 0)
+                    if (categorys.Count > 0 && brands.Count > 0)
                     {
                         sb.Append(" for " + brands.Count + " brands");
                         sb.Append(" / " + categorys.Count + " categories (");
